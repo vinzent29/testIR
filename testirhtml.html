@@ -3,8 +3,10 @@
 <div id="data" align=right><FONT COLOR=#DDDDDD>OFFLINE</FONT></div>
 <br><br><br>
 <center><a class="btn btn-blue" onclick="send()">send</a></center>
+<center><a class="btn btn-blue" onclick="send2()">get</a></center>
+<center><a class="btn btn-blue" onclick="send3()">reset</a></center>
 <div id="meter">
-	<div id="meter4">0 %</div>
+	<div id="meter1">0 %</div>
 </div>
 
 <script>
@@ -27,7 +29,7 @@
 	microgear.on('message',function(topic,msg) {
         if(topic.indexOf('/irhtml/recieve')>=0){
 			var m = msg.split(':');
-			document.getElementById("meter4").innerHTML = m[0].trim()+" kWh";
+			document.getElementById("meter1").innerHTML = m[0].trim()+" %";
 		}
 	});
 
@@ -46,6 +48,14 @@
 
 	function send() {
         microgear.chat('send','1');		  
+    }
+
+	function send2() {
+        microgear.chat('recieve','1');		  
+    }
+
+	function send3() {
+        microgear.chat('recieve','2');		  
     }
 
 
@@ -129,11 +139,7 @@ a.btn.btn-red {
 		text-align: center;
 		font-family: sans-serif;
 	}
-	#meter1, #meter2, #meter3 {
-		width:600px; height:480px;
-		display: inline-block;
-	}
-	#meter4 {
+	#meter1 {
 		font-size: 48px;
 		font-weight: bold;
 	}
